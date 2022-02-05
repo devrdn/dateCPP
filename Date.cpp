@@ -1,5 +1,8 @@
 #include "Date.h"
 
+const int MIN_Y = 1900;
+const int MAX_Y = 2060;
+
 Date::Date()
 {
 	this->day = 01;
@@ -21,28 +24,53 @@ Date::Date(Date& date)
 	this->year = date.day;
 }
 
+
+void Date::isValidDate()
+{
+	if (this->day <= 0 || this->day > 31)
+		throw DateException(1);
+
+	else if (this->month <= 0 || this->month > 12)
+		throw DateException(2);
+
+	else if (this->year < MIN_Y || this->year > MAX_Y)
+		throw DateException(3);
+
+	else if (this->day == 31) {
+		if ((this->month <= 7 && this->month % 2 == 0) || (this->month >= 8 && this->month % 2 != 0))
+			throw DateException(5);
+	}
+
+	else if (this->month == 2) {
+		if (this->day == 29 && this->year % 4 == 0)
+			throw DateException(5);
+		else if (this->day == 30 || this->day == 31)
+			throw DateException(5);
+	}
+		
+		
+}
+
 Date::Date(string date)
 {
 	cmatch cdate;
 	regex regexp("([\\d]{1,2})\.([\\d]{1,2})\.([\\d]{1,4})");
-	if (regex_match(date.c_str(), cdate, regexp)) {
-		this->day = atoi(cdate[1].str().c_str());
-		this->month = atoi(cdate[2].str().c_str());
-		this->year = atoi(cdate[3].str().c_str());
-		try {
-			this->isValidDate();
-		}
-		catch (DateException ex) {
-			cout << "Error: " << hex << ex.getError();
-			exit(0);
-		}
-		/*if (!this->isValidDate()) {
-			cout << "\n Incorrect Date." << endl;
-			exit(0);
-		}*/
+	try {
+		if (!regex_match(date.c_str(), cdate, regexp))
+			throw DateException(4);
 	}
-	else {
-		cout << "\n Incorrect Value." << endl;
+	catch (DateException& ex) {
+		cout << "Error(" << ex.getErrorNumber() << "): " << ex.getError() << ".";
+		exit(4);
+	}
+	this->day = atoi(cdate[1].str().c_str());
+	this->month = atoi(cdate[2].str().c_str());
+	this->year = atoi(cdate[3].str().c_str());
+	try {
+		this->isValidDate();
+	}
+	catch (DateException& ex) {
+		cout << "Error(" << ex.getErrorNumber() << "): " << ex.getError() << ".";
 		exit(0);
 	}
 }
@@ -122,35 +150,16 @@ bool Date::operator>=(Date& date)
 	return false;
 }
 
-void Date::isValidDate()
-{
-	if (this->day <= 0 || this->day > 31)
-		throw DateException(1);
-
-	else if (this->month <= 0 || this->month > 12)
-		throw DateException(2);
-
-	else if (this->year < MIN_Y || this->year > MAX_Y)
-		throw DateException(3);
-
-	else if (this->day == 31)
-		if ((this->month <= 7 && this->month % 2 == 0) || (this->month >= 8 && this->month % 2 != 0))
-			throw DateException(5);
-
-		else if (this->month == 2 && this->day == 29)
-			if (this->year % 4 != 0)
-				throw DateException(5);
-}
 
 ostream& operator<<(ostream& out, Date& date)
 {
 	return out << "Date{ " << date.day << "." << date.month << "." << date.year << " }";
 }
 
-istream& operator>>(istream& in, Date& date)
-{
-	string tdate;
-	in >> tdate;
-	Date(tdate);
-	return in;
-}
+//istream& operator>>(istream& in, Date& date)
+//{
+//	string tdate;
+//	in >> tdate;
+//	Date(tdate);
+//	return in;
+//}
