@@ -7,7 +7,7 @@ Date::Date()
 {
 	this->day = 01;
 	this->month = 01;
-	this->year = 1900;
+	this->year = MIN_Y;
 }
 
 Date::Date(int day, int month, int year)
