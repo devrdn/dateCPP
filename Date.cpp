@@ -109,6 +109,21 @@ void Date::setYear(int year)
 	this->year = year;
 }
 
+int Date::getDay()
+{
+	return this->day;
+}
+
+int Date::getMonth()
+{
+	return this->month;
+}
+
+int Date::getYear()
+{
+	return this->year;
+}
+
 bool Date::isTillToday()
 {
 	Date t_date;

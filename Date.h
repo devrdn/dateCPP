@@ -23,6 +23,9 @@ public:
 	void setDay(int day);
 	void setMonth(int month);
 	void setYear(int year);
+	int getDay();
+	int getMonth();
+	int getYear();
 	bool isTillToday();
 	friend ostream& operator << (ostream& out, Date& date);
 	friend istream& operator >> (istream& in, Date& date);
