@@ -156,10 +156,12 @@ ostream& operator<<(ostream& out, Date& date)
 	return out << "Date{ " << date.day << "." << date.month << "." << date.year << " }";
 }
 
-//istream& operator>>(istream& in, Date& date)
-//{
-//	string tdate;
-//	in >> tdate;
-//	Date(tdate);
-//	return in;
-//}
+istream& operator>>(istream& in, Date& date)
+{
+	string t_date;
+	in >> t_date;
+	date = Date(t_date);
+	return in;
+	
+}
+
