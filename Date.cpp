@@ -25,30 +25,28 @@ Date::Date(Date& date)
 }
 
 
-void Date::isValidDate()
+void isValidDate(int day, int month, int year)
 {
-	if (this->day <= 0 || this->day > 31)
+	if (day <= 0 || day > 31)
 		throw DateException(1);
 
-	else if (this->month <= 0 || this->month > 12)
+	else if (month <= 0 || month > 12)
 		throw DateException(2);
 
-	else if (this->year < MIN_Y || this->year > MAX_Y)
+	else if (year < MIN_Y || year > MAX_Y)
 		throw DateException(3);
 
-	else if (this->day == 31) {
-		if ((this->month <= 7 && this->month % 2 == 0) || (this->month >= 8 && this->month % 2 != 0))
+	else if (day == 31) {
+		if ((month <= 7 && month % 2 == 0) || (month >= 8 && month % 2 != 0))
 			throw DateException(5);
 	}
 
-	else if (this->month == 2) {
-		if (this->day == 29 && this->year % 4 != 0)
+	else if (month == 2) {
+		if (day == 29 && year % 4 != 0)
 			throw DateException(5);
-		else if (this->day == 30 || this->day == 31)
+		else if (day == 30 || day == 31)
 			throw DateException(5);
 	}
-		
-		
 }
 
 Date::Date(string date)
@@ -67,12 +65,48 @@ Date::Date(string date)
 	this->month = atoi(cdate[2].str().c_str());
 	this->year = atoi(cdate[3].str().c_str());
 	try {
-		this->isValidDate();
+		isValidDate(this->day, this->month, this->year);
 	}
 	catch (DateException& ex) {
 		cout << "Error(" << ex.getErrorNumber() << "): " << ex.getError() << ".";
 		exit(0);
 	}
+}
+
+void Date::setDay(int day)
+{
+	try {
+		isValidDate(day, this->month, this->year);
+	}
+	catch (DateException &ex) {
+		cout << "Error(" << ex.getErrorNumber() << "): " << ex.getError() << ".";
+		return;
+	}
+	this->day = day;
+}
+
+void Date::setMonth(int month)
+{
+	try {
+		isValidDate(this->day, month, this->year);
+	}
+	catch (DateException& ex) {
+		cout << "Error(" << ex.getErrorNumber() << "): " << ex.getError() << ".";
+		return;
+	}
+	this->month = month;
+}
+
+void Date::setYear(int year)
+{
+	try {
+		isValidDate(this->day, this->month, year);
+	}
+	catch (DateException& ex) {
+		cout << "Error(" << ex.getErrorNumber() << "): " << ex.getError() << ".";
+		return;
+	}
+	this->year = year;
 }
 
 bool Date::isTillToday()
@@ -150,6 +184,12 @@ bool Date::operator>=(Date& date)
 	return false;
 }
 
+Date& Date::operator==(string date)
+{
+	Date t_date(date);
+	return t_date;
+}
+
 
 ostream& operator<<(ostream& out, Date& date)
 {
@@ -164,4 +204,6 @@ istream& operator>>(istream& in, Date& date)
 	return in;
 	
 }
+
+
 

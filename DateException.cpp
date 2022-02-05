@@ -8,7 +8,7 @@ DateException::DateException(int a)
 		m_error = "invalid day";
 		break;
 	case 2:
-		m_error = to_string(a) + " | invalid month";
+		m_error = "invalid month";
 		break;
 	case 3:
 		m_error = "invalid year";
