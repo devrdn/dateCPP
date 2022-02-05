@@ -42,7 +42,7 @@ void Date::isValidDate()
 	}
 
 	else if (this->month == 2) {
-		if (this->day == 29 && this->year % 4 == 0)
+		if (this->day == 29 && this->year % 4 != 0)
 			throw DateException(5);
 		else if (this->day == 30 || this->day == 31)
 			throw DateException(5);
