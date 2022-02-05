@@ -12,9 +12,6 @@ class Date
 	int day;
 	int month;
 	int year;
-
-
-
 public:
 	Date();
 	Date(int day, int month, int year);
@@ -36,6 +33,5 @@ public:
 	bool operator > (Date& date);
 	bool operator >= (Date& date);
 	Date& operator == (string date);
-
 };
 
