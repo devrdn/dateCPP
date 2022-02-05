@@ -199,7 +199,7 @@ bool Date::operator>=(Date& date)
 	return false;
 }
 
-Date& Date::operator==(string date)
+Date& Date::operator=(string date)
 {
 	Date t_date(date);
 	return t_date;
