@@ -10,11 +10,7 @@ class DateException
 public:
 	DateException(int a);
 
-	const int getErrorNumber() {
-		return error;
-	}
+	const int getErrorNumber();
 
-	const char* getError() {
-		return m_error.c_str();
-	}
+	const char* getError();
 };

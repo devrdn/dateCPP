@@ -21,3 +21,13 @@ DateException::DateException(int a)
 		break;
 	}
 }
+
+const int DateException::getErrorNumber()
+{
+	return error;
+}
+
+const char* DateException::getError()
+{
+	return m_error.c_str();
+}
