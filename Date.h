@@ -24,6 +24,7 @@ public:
 	int getMonth();
 	int getYear();
 	bool isTillToday();
+	string toString();
 	friend ostream& operator << (ostream& out, Date& date);
 	friend istream& operator >> (istream& in, Date& date);
 	friend void isValidDate(int day, int month, int year);
