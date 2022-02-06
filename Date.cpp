@@ -49,6 +49,7 @@ void isValidDate(int day, int month, int year)
 	}
 }
 
+
 Date::Date(string date)
 {
 	cmatch cdate;
@@ -199,7 +200,13 @@ bool Date::operator>=(Date& date)
 	return false;
 }
 
-Date& Date::operator=(string date)
+Date& Date::operator=(string& date)
+{
+	Date t_date(date);
+	return t_date;
+}
+
+Date& Date::operator=(const char* date)
 {
 	Date t_date(date);
 	return t_date;

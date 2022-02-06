@@ -32,6 +32,7 @@ public:
 	bool operator <= (Date& date);
 	bool operator > (Date& date);
 	bool operator >= (Date& date);
-	Date& operator = (string date);
+	Date& operator = (string& date);
+	Date& operator = (const char* date);
 };
 
