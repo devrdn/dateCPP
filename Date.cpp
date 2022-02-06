@@ -142,7 +142,10 @@ bool Date::isTillToday()
 
 string Date::toString()
 {
-	return "Date{ " + to_string(this->day) + ", " + to_string(this->month) + ", " + to_string(this->year) + " }";
+	return  "Date{ " + to_string(this->day) + 
+			", " + to_string(this->month) + 
+			", " + to_string(this->year) + 
+			" }";
 }
 
 bool Date::operator==(Date& date)
